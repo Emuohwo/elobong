@@ -1,0 +1,91 @@
+{
+  "projectType": "application",
+  "root": "apps/ebong",
+  "sourceRoot": "apps/ebong/src",
+  "prefix": "elobong",
+  "targets": {
+    "build": {
+      "executor": "@angular-devkit/build-angular:browser",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/apps/ebong",
+        "index": "apps/ebong/src/index.html",
+        "main": "apps/ebong/src/main.ts",
+        "polyfills": "apps/ebong/src/polyfills.ts",
+        "tsConfig": "apps/ebong/tsconfig.app.json",
+        "inlineStyleLanguage": "scss",
+        "assets": ["apps/ebong/src/favicon.ico", "apps/ebong/src/assets"],
+        "styles": ["apps/ebong/src/styles.scss"],
+        "scripts": []
+      },
+      "configurations": {
+        "production": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kb",
+              "maximumError": "1mb"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kb",
+              "maximumError": "4kb"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/ebong/src/environments/environment.ts",
+              "with": "apps/ebong/src/environments/environment.prod.ts"
+            }
+          ],
+          "outputHashing": "all"
+        },
+        "development": {
+          "buildOptimizer": false,
+          "optimization": false,
+          "vendorChunk": true,
+          "extractLicenses": false,
+          "sourceMap": true,
+          "namedChunks": true
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "serve": {
+      "executor": "@angular-devkit/build-angular:dev-server",
+      "configurations": {
+        "production": {
+          "browserTarget": "ebong:build:production"
+        },
+        "development": {
+          "browserTarget": "ebong:build:development"
+        }
+      },
+      "defaultConfiguration": "development"
+    },
+    "extract-i18n": {
+      "executor": "@angular-devkit/build-angular:extract-i18n",
+      "options": {
+        "browserTarget": "ebong:build"
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "apps/ebong/src/**/*.ts",
+          "apps/ebong/src/**/*.html"
+        ]
+      }
+    },
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/apps/ebong"],
+      "options": {
+        "jestConfig": "apps/ebong/jest.config.js",
+        "passWithNoTests": true
+      }
+    }
+  },
+  "tags": []
+}

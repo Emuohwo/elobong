@@ -1,0 +1,28 @@
+{
+  "root": "apps/ebong-e2e",
+  "sourceRoot": "apps/ebong-e2e/src",
+  "projectType": "application",
+  "targets": {
+    "e2e": {
+      "executor": "@nrwl/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/ebong-e2e/cypress.json",
+        "devServerTarget": "ebong:serve:development"
+      },
+      "configurations": {
+        "production": {
+          "devServerTarget": "ebong:serve:production"
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["apps/ebong-e2e/**/*.{js,ts}"]
+      }
+    }
+  },
+  "tags": [],
+  "implicitDependencies": ["ebong"]
+}
