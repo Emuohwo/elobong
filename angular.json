@@ -1,7 +1,9 @@
 {
-  "version": 2,
-  "projects": {
-    "ebong": "apps/ebong",
-    "ebong-e2e": "apps/ebong-e2e"
-  }
+    "version": 2,
+    "projects": {
+        "admin": "apps/admin",
+        "admin-e2e": "apps/admin-e2e",
+        "ebong": "apps/ebong",
+        "ebong-e2e": "apps/ebong-e2e"
+    }
 }
