@@ -14,7 +14,10 @@
         "skipLibCheck": true,
         "skipDefaultLibCheck": true,
         "baseUrl": ".",
-        "paths": {}
+        "paths": {
+            "@elobong/products": ["libs/products/src/index.ts"],
+            "@elobong/ui": ["libs/ui/src/index.ts"]
+        }
     },
     "exclude": ["node_modules", "tmp"]
 }
