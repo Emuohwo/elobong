@@ -1,0 +1,18 @@
+// Base
+@import './base/colors.scss';
+@import './base/fonts.scss';
+@import './base//mixins.scss';
+@import './base/configuration.scss';
+
+
+// Pages
+@import './apps/ebong/pages/home-page.scss';
+@import './apps/ebong/pages/product-list-page.scss';
+
+
+// Shared
+@import './apps/ebong/shared/footer.scss';
+@import './apps/ebong/shared/header.scss';
+
+// ui
+@import './libs/ui/ui.scss'

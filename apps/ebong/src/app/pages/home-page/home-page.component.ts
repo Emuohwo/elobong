@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'elobong-home-page',
-    templateUrl: './home-page.component.html',
-    styleUrls: ['./home-page.component.scss']
+    selector: 'ebong-home-page',
+    templateUrl: './home-page.component.html'
 })
 export class HomePageComponent implements OnInit {
     constructor() {}

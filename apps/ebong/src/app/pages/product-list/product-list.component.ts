@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'elobong-product-list',
-    templateUrl: './product-list.component.html',
-    styleUrls: ['./product-list.component.scss']
+    selector: 'ebong-product-list',
+    templateUrl: './product-list.component.html'
 })
 export class ProductListComponent implements OnInit {
     constructor() {}
