@@ -14,12 +14,16 @@ import {ButtonModule} from 'primeng/button';
 import {TableModule} from 'primeng/table';
 import { HttpClientModule } from '@angular/common/http';
 import { CategoriesService } from '@elobong/products';
+import { CategoriesFormComponent } from './categories/categories-form/categories-form.component';
+import { InputTextModule } from 'primeng/inputtext';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const UX_MODULE = [
     CardModule, 
     ToolbarModule,
     ButtonModule,
-    TableModule
+    TableModule,
+    InputTextModule,
 ]
 
 const routes: Routes = [
@@ -35,16 +39,22 @@ const routes: Routes = [
                 path: 'categories',
                 component: CategoriesListComponent
             },
+            {
+                path: 'categories/form',
+                component: CategoriesFormComponent
+            },
         ]
     }
 ]
 
 @NgModule({
-    declarations: [AppComponent, NxWelcomeComponent, DashboardComponent, ShellComponent, SidebarComponent, CategoriesListComponent,],
+    declarations: [AppComponent, NxWelcomeComponent, DashboardComponent, ShellComponent, SidebarComponent, CategoriesListComponent, CategoriesFormComponent,],
     imports: [
         BrowserModule, 
         RouterModule.forRoot(routes, { initialNavigation: 'enabled' }),
         HttpClientModule,
+        FormsModule,
+        ReactiveFormsModule,
         ...UX_MODULE
     ],
     providers: [CategoriesService],
