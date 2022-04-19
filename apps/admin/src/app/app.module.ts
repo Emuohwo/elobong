@@ -12,6 +12,8 @@ import {CardModule} from 'primeng/card';
 import {ToolbarModule} from 'primeng/toolbar';
 import {ButtonModule} from 'primeng/button';
 import {TableModule} from 'primeng/table';
+import { HttpClientModule } from '@angular/common/http';
+import { CategoriesService } from '@elobong/products';
 
 const UX_MODULE = [
     CardModule, 
@@ -40,10 +42,12 @@ const routes: Routes = [
 @NgModule({
     declarations: [AppComponent, NxWelcomeComponent, DashboardComponent, ShellComponent, SidebarComponent, CategoriesListComponent,],
     imports: [
-        BrowserModule, RouterModule.forRoot(routes, { initialNavigation: 'enabled' }),
+        BrowserModule, 
+        RouterModule.forRoot(routes, { initialNavigation: 'enabled' }),
+        HttpClientModule,
         ...UX_MODULE
     ],
-    providers: [],
+    providers: [CategoriesService],
     bootstrap: [AppComponent]
 })
 export class AppModule {}

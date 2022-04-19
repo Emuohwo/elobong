@@ -11,6 +11,6 @@ export class CategoriesService {
   constructor( private http: HttpClient) { }
 
   getCategories(): Observable<Category[]> {
-    return this.http.get<Category[]>('https://localhost:3000/api/v1/categories')
+    return this.http.get<Category[]>('http://localhost:3000/api/v1/categories')
   }
 }

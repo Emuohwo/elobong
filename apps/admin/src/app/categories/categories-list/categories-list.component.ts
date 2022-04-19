@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CategoriesService, Category } from '@elobong/products'
 
 @Component({
   selector: 'admin-categories-list',
@@ -8,22 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoriesListComponent implements OnInit {
 
-  categories = [
-    {
-      id: 1,
-      name: 'category-1',
-      icon: 'icon-1'
-    },
-    {
-      id: 2,
-      name: 'category-2',
-      icon: 'icon-2'
-    },
-  ]
+  categories: Category[] = []
 
-  constructor() { }
+  constructor(private categoriesService: CategoriesService) { }
 
   ngOnInit(): void {
+    this.categoriesService.getCategories().subscribe((cats) => {
+      this.categories = cats;
+    })
   }
 
 }
