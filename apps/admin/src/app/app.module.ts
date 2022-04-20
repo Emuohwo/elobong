@@ -20,6 +20,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MessageService } from 'primeng/api';
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ConfirmationService} from 'primeng/api';
 
 const UX_MODULE = [
     CardModule, 
@@ -28,6 +30,7 @@ const UX_MODULE = [
     TableModule,
     InputTextModule,
     ToastModule,
+    ConfirmDialogModule,
 ]
 
 const routes: Routes = [
@@ -62,7 +65,10 @@ const routes: Routes = [
         ReactiveFormsModule,
         ...UX_MODULE
     ],
-    providers: [CategoriesService, MessageService],
+    providers: [
+        CategoriesService, MessageService,
+        ConfirmationService,
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {}
