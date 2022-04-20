@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 import { AppComponent } from './app.component';
 import { NxWelcomeComponent } from './nx-welcome.component';
@@ -16,7 +17,9 @@ import { HttpClientModule } from '@angular/common/http';
 import { CategoriesService } from '@elobong/products';
 import { CategoriesFormComponent } from './categories/categories-form/categories-form.component';
 import { InputTextModule } from 'primeng/inputtext';
+import { ToastModule } from 'primeng/toast';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MessageService } from 'primeng/api';
 
 const UX_MODULE = [
     CardModule, 
@@ -24,6 +27,7 @@ const UX_MODULE = [
     ButtonModule,
     TableModule,
     InputTextModule,
+    ToastModule,
 ]
 
 const routes: Routes = [
@@ -51,13 +55,14 @@ const routes: Routes = [
     declarations: [AppComponent, NxWelcomeComponent, DashboardComponent, ShellComponent, SidebarComponent, CategoriesListComponent, CategoriesFormComponent,],
     imports: [
         BrowserModule, 
+        BrowserAnimationsModule,
         RouterModule.forRoot(routes, { initialNavigation: 'enabled' }),
         HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
         ...UX_MODULE
     ],
-    providers: [CategoriesService],
+    providers: [CategoriesService, MessageService],
     bootstrap: [AppComponent]
 })
 export class AppModule {}
