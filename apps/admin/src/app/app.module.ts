@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
-
+import { ProductsListComponent } from './pages/products/products-list/products-list.component';
+import { ProductsFormComponent } from './pages/products/products-form/products-form.component'
 import { AppComponent } from './app.component';
 import { NxWelcomeComponent } from './nx-welcome.component';
 import { RouterModule, Routes } from '@angular/router';
@@ -9,6 +10,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ShellComponent } from './shared/shell/shell.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { CategoriesListComponent } from './pages/categories/categories-list/categories-list.component';
+
 import {CardModule} from 'primeng/card';
 import {ToolbarModule} from 'primeng/toolbar';
 import {ButtonModule} from 'primeng/button';
@@ -22,7 +24,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MessageService } from 'primeng/api';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
-import { ColorPickerModule } from 'primeng/colorpicker'
+import { ColorPickerModule } from 'primeng/colorpicker';
 
 const UX_MODULE = [
     CardModule, 
@@ -56,12 +58,24 @@ const routes: Routes = [
                 path: 'categories/form/:id',
                 component: CategoriesFormComponent
             },
+            {
+                path: 'products',
+                component: ProductsListComponent
+            },
+            {
+                path: 'products/form',
+                component: ProductsFormComponent
+            },
+            {
+                path: 'products/form/:id',
+                component: ProductsFormComponent
+            },
         ]
     }
 ]
 
 @NgModule({
-    declarations: [AppComponent, NxWelcomeComponent, DashboardComponent, ShellComponent, SidebarComponent, CategoriesListComponent, CategoriesFormComponent,],
+    declarations: [AppComponent, NxWelcomeComponent, DashboardComponent, ShellComponent, SidebarComponent, CategoriesListComponent, CategoriesFormComponent, ProductsListComponent, ProductsFormComponent,],
     imports: [
         BrowserModule, 
         BrowserAnimationsModule,
