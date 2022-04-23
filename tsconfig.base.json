@@ -18,7 +18,8 @@
             "@elobong/orders": ["libs/orders/src/index.ts"],
             "@elobong/products": ["libs/products/src/index.ts"],
             "@elobong/ui": ["libs/ui/src/index.ts"],
-            "@elobong/users": ["libs/users/src/index.ts"]
+            "@elobong/users": ["libs/users/src/index.ts"],
+            "@env/*": ["environments/*"]
         }
     },
     "exclude": ["node_modules", "tmp"]

@@ -15,7 +15,7 @@ import { timer } from 'rxjs';
 export class CategoriesFormComponent implements OnInit {
 
   form!: FormGroup;
-  isSubmitted?: boolean = false;
+  isSubmitted = false;
   editMode = false;
   currentCategoryID!: string;
 
@@ -35,6 +35,12 @@ export class CategoriesFormComponent implements OnInit {
     });
 
     this._checkEditMode();
+  }
+
+  cancel() {
+    timer(200).toPromise().then(() => {
+      this.location.back()
+    })
   }
 
   onSubmit() {
@@ -68,17 +74,17 @@ export class CategoriesFormComponent implements OnInit {
   }
 
   private _addCategory(category: Category) {
-    this.categoriesService.createCategory(category).subscribe( (res) =>{
+    this.categoriesService.createCategory(category).subscribe( (category: Category) =>{
       this.messageService.add({
         severity:'success',
         summary:'Success',
-        detail:'Category was created successfully'
+        detail:`Category ${category.name} was created successfully`
       });
-      timer(2000).toPromise().then(done => {
+      timer(2000).toPromise().then(() => {
         this.location.back()
       })
     },
-    (error) => {
+    () => {
       this.messageService.add({
         severity:'error',
         summary:'Error',
@@ -88,17 +94,17 @@ export class CategoriesFormComponent implements OnInit {
   }
 
   private _updateCategory(category: Category) {
-    this.categoriesService.updateCategory(category).subscribe( (res) =>{
+    this.categoriesService.updateCategory(category).subscribe( (category: Category) =>{
       this.messageService.add({
         severity:'success',
         summary:'Success',
-        detail:'Category was updated successfully'
+        detail:` ${category.name} category was created successfully`
       });
-      timer(2000).toPromise().then(done => {
+      timer(2000).toPromise().then(() => {
         this.location.back()
       })
     },
-    (error) => {
+    () => {
       this.messageService.add({
         severity:'error',
         summary:'Error',
