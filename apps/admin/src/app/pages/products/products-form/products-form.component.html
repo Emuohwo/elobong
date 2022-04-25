@@ -61,6 +61,7 @@
                                   [options]="categories" 
                                   formControlName="category"
                                   optionLabel="name"
+                                  optionValue="id"
                                   [filter]="true" filterBy="name"
                                   [showClear]="true"
                                   placeholder="Select a Category"
@@ -106,7 +107,6 @@
                                   type="file"
                                   (change)="onImageUpload($event)"
                                   class="p-inputtext"
-                                  formControlName="image"
                                   accept="image/*"
                                 />
                                 <div class="col-2 mt-2 pl-1">
