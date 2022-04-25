@@ -1,6 +1,7 @@
 import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { CategoriesService, Category, Product, ProductsService } from '@elobong/products';
 import { MessageService } from 'primeng/api';
 import { timer } from 'rxjs';
@@ -18,6 +19,7 @@ export class ProductsFormComponent implements OnInit {
   form!: FormGroup
   categories: Category[] = [];
   imageDisplay?: string | ArrayBuffer | null;
+  currentProductID?: string
 
   constructor(
     private formBuilder: FormBuilder,
@@ -25,11 +27,13 @@ export class ProductsFormComponent implements OnInit {
     private productsService: ProductsService,
     private messageService: MessageService,
     private location: Location,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
     this._initForm()
     this._getCategories()
+    this._checkEditMode()
   }
 
   private _initForm(){
@@ -52,6 +56,26 @@ export class ProductsFormComponent implements OnInit {
     })
   }
 
+  private _checkEditMode() {
+    this.route.params.subscribe(params => {
+      if (params['id']) {
+        this.editMode = true;
+        this.currentProductID = params['id']
+        this.productsService.getProduct(params['id']).subscribe(product => {
+          this.productForm['name'].setValue(product.name);
+          this.productForm['category'].setValue(product.category?.id);
+          this.productForm['brand'].setValue(product.brand);
+          this.productForm['price'].setValue(product.price);
+          this.productForm['countInStock'].setValue(product.countInStock);
+          this.productForm['isFeatured'].setValue(product.isFeatured);
+          this.productForm['description'].setValue(product.description);
+          this.productForm['richDescription'].setValue(product.richDescription);
+          this.imageDisplay = product.image
+        })
+      }
+    })
+  }
+
   onSubmit() {
     this.isSubmitted = true;
     if (this.form.invalid) return;
@@ -64,7 +88,11 @@ export class ProductsFormComponent implements OnInit {
       productFormData.append(key, this.productForm[key].value)
     })
 
-    this._addProduct(productFormData)
+    if (this.editMode) {
+      this._updateProduct(productFormData)
+    } else {
+      this._addProduct(productFormData)
+    }
   }
 
   onCancel() {
@@ -103,6 +131,30 @@ export class ProductsFormComponent implements OnInit {
         detail:'An error occurred while creating product, please try agin later'
       });
     })
+  }
+
+  private _updateProduct(productFormData: FormData){
+    this.productsService.updateProduct(productFormData, this.currentProductID as string).subscribe(
+      () => {
+        this.messageService.add({
+          severity: 'success',
+          summary: 'Success',
+          detail: 'Product was updated successfully'
+        });
+        timer(200)
+          .toPromise()
+          .then(() => {
+            this.location.back();
+          })
+      },
+      () => {
+        this.messageService.add({
+          severity: 'error',
+          summary: 'Error',
+          detail: 'Error occurred'
+        });
+      }
+    )
   }
 
   get productForm() {

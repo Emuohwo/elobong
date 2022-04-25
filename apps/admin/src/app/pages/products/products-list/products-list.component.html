@@ -37,7 +37,7 @@
                             <td>{{product.category?.name}}</td>
                             <td>{{product.dateCreated | date: 'short'}}</td>
                             <td>
-                                <!-- <p-button
+                                <p-button
                                   styleClass="p-button-danger mr-2"
                                   icon="pi pi-trash"
                                   (onClick)="deleteProduct(product.id)"
@@ -46,7 +46,7 @@
                                   styleClass="p-button-success"
                                   icon="pi pi-pencil"
                                   (click)="updateProduct(product.id)"
-                                ></p-button> -->
+                                ></p-button>
                             </td>
                         </tr>
                     </ng-template>

@@ -17,9 +17,9 @@ export class ProductsService {
     return this.http.get<Product[]>(this.apiURLProducts)
   }
 
-  // getCategory(categoryId: string): Observable<Product> {
-  //   return this.http.get<Product>(`${this.apiURLProducts}/${categoryId}`)
-  // }
+  getProduct(productId: string): Observable<Product> {
+    return this.http.get<Product>(`${this.apiURLProducts}/${productId}`)
+  }
 
   createProduct(productData: FormData): Observable<Product> {
     return this.http.post<Product>(
@@ -28,12 +28,12 @@ export class ProductsService {
     )
   }
 
-  // updateCategory(category: Product): Observable<Product> {
-  //   return this.http.put<Product>(
-  //     `${this.apiURLProducts}/${category.id}`, 
-  //     category
-  //   )
-  // }
+  updateProduct(productData: FormData, productId: string): Observable<Product> {
+    return this.http.put<Product>(
+      `${this.apiURLProducts}/${productId}`, 
+      productData
+    )
+  }
 
   // deleteCategory(categoryId: string): Observable<any> {
   //   return this.http.delete<any>(`${this.apiURLProducts}/${categoryId}`)
