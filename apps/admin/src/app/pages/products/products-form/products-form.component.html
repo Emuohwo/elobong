@@ -109,6 +109,9 @@
                                   class="p-inputtext"
                                   accept="image/*"
                                 />
+                                <small
+                                  *ngIf="productForm['image'].invalid && isSubmitted"
+                                  class="p-error">Image is required</small>
                                 <div class="col-2 mt-2 pl-1">
                                     <img style="width: 100%;" [src]="imageDisplay" alt="">
                                 </div>
