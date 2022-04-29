@@ -10,6 +10,8 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { ShellComponent } from './shared/shell/shell.component';
 import { SidebarComponent } from './shared/sidebar/sidebar.component';
 import { CategoriesListComponent } from './pages/categories/categories-list/categories-list.component';
+import { UsersListComponent } from './pages/users/users-list/users-list.component';
+import { UsersFormComponent } from './pages/users/users-form/users-form.component';
 
 import {CardModule} from 'primeng/card';
 import {ToolbarModule} from 'primeng/toolbar';
@@ -30,6 +32,7 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import {DropdownModule} from 'primeng/dropdown';
 import {EditorModule} from 'primeng/editor';
+import { TagModule } from 'primeng/tag';
 
 const UX_MODULE = [
     CardModule, 
@@ -45,6 +48,7 @@ const UX_MODULE = [
     InputSwitchModule,
     DropdownModule,
     EditorModule,
+    TagModule,
 ]
 
 const routes: Routes = [
@@ -80,12 +84,24 @@ const routes: Routes = [
                 path: 'products/form/:id',
                 component: ProductsFormComponent
             },
+            {
+                path: 'users',
+                component: UsersListComponent
+            },
+            {
+                path: 'users/form',
+                component: UsersFormComponent
+            },
+            {
+                path: 'users/form/:id',
+                component: UsersFormComponent
+            },
         ]
     }
 ]
 
 @NgModule({
-    declarations: [AppComponent, NxWelcomeComponent, DashboardComponent, ShellComponent, SidebarComponent, CategoriesListComponent, CategoriesFormComponent, ProductsListComponent, ProductsFormComponent,],
+    declarations: [AppComponent, NxWelcomeComponent, DashboardComponent, ShellComponent, SidebarComponent, CategoriesListComponent, CategoriesFormComponent, ProductsListComponent, ProductsFormComponent, UsersListComponent, UsersFormComponent,],
     imports: [
         BrowserModule, 
         BrowserAnimationsModule,
