@@ -49,7 +49,7 @@ export class UsersListComponent implements OnInit {
   }
 
   updateUser(userId: string) {
-    this.router.navigateByUrl(`categories/form/${userId}`)
+    this.router.navigateByUrl(`users/form/${userId}`)
   }
 
   private _getUsers(){
