@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User, UsersService } from '@elobong/users';
 import { ConfirmationService, MessageService } from 'primeng/api';
+import * as countriesLib from 'i18n-iso-countries'
+
+declare const require:any;
 
 @Component({
   selector: 'admin-users-list',
@@ -21,7 +24,7 @@ export class UsersListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this._getUsers()
+    this._getUsers();
   }
 
   deleteUser(userId: string) {
@@ -53,8 +56,13 @@ export class UsersListComponent implements OnInit {
   }
 
   private _getUsers(){
-    this.usersService.getUsers().subscribe((cats) => {
-      this.users = cats;
+    this.usersService.getUsers().subscribe((_users) => {
+      this.users = _users;
     })
+  }
+
+  _getCountryName(countryCode: string) {
+    countriesLib.registerLocale(require("i18n-iso-countries/langs/en.json"));
+    return countriesLib.getName(countryCode, "en");
   }
 }
