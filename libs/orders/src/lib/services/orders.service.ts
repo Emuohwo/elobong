@@ -17,8 +17,8 @@ export class OrdersService {
     return this.http.get<Order[]>(this.apiURLOrders)
   }
 
-  getCategory(categoryId: string): Observable<Order> {
-    return this.http.get<Order>(`${this.apiURLOrders}/${categoryId}`)
+  getOrder(orderId: string): Observable<Order> {
+    return this.http.get<Order>(`${this.apiURLOrders}/${orderId}`)
   }
 
   createOrder(category: Order): Observable<Order> {
@@ -28,12 +28,12 @@ export class OrdersService {
     )
   }
 
-//   updateCategory(category: Category): Observable<Category> {
-//     return this.http.put<Category>(
-//       `${this.apiURLOrders}/${category.id}`, 
-//       category
-//     )
-//   }
+  updateOrder(orderStatus: { status: string }, orderId: string): Observable<Order> {
+    return this.http.put<Order>(
+      `${this.apiURLOrders}/${orderId}`, 
+      orderStatus
+    )
+  }
 
   deleteOrder(orderId: string): Observable<any> {
     return this.http.delete<any>(`${this.apiURLOrders}/${orderId}`)

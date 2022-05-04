@@ -3,9 +3,9 @@ import { OrderItem } from "./order-item";
 
 export class Order {
     id?: string;
-    orderItem?: OrderItem;
+    orderItems?: OrderItem;
     shippingAddress1?: string;
-    shippingaddress2?: string;
+    shippingAddress2?: string;
     city?: string;
     zip?: string;
     country?: string;

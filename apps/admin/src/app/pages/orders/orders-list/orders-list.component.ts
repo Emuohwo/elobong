@@ -1,29 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Order, OrdersService } from '@elobong/orders';
+import { ORDER_STATUS } from '../order.constants';
 
-const ORDER_STATUS: object = {
-  0: {
-    label: 'Pending',
-    color: 'primary'
-  },
-  1: {
-    label: 'Processed',
-    color: 'warning'
-  },
-  2: {
-    label: 'Shipped',
-    color: 'warning'
-  },
-  3: {
-    label: 'Delivered',
-    color: 'success'
-  },
-  4: {
-    label: 'Failed',
-    color: 'danger'
-  },
-}
 @Component({
   selector: 'admin-orders-list',
   templateUrl: './orders-list.component.html',
@@ -55,6 +34,10 @@ export class OrdersListComponent implements OnInit {
 
   showOrder(orderId: string) {
     this.router.navigateByUrl(`orders/${orderId}`)
+  }
+
+  deleteOrder(orderId:string){
+    // 
   }
 
 }
