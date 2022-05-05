@@ -27,6 +27,14 @@ export class OrdersService {
       category
     )
   }
+  
+  getTotalSales() : Observable<any> {
+    return this.http.get<any>(`${this.apiURLOrders}/get/totalSales`)
+  }
+  
+  getOrdersCount() : Observable<any> {
+    return this.http.get<any>(`${this.apiURLOrders}/get/count`)
+  }
 
   updateOrder(orderStatus: { status: string }, orderId: string): Observable<Order> {
     return this.http.put<Order>(

@@ -21,6 +21,10 @@ export class UsersService {
     return this.http.get<User>(`${this.apiURLUsers}/${userId}`)
   }
 
+  getUserCount() : Observable<any> {
+    return this.http.get<any>(`${this.apiURLUsers}/get/count`)
+  }
+
   createUser(user: User): Observable<User> {
     return this.http.post<User>(
       `${this.apiURLUsers}/register`,
