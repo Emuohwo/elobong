@@ -37,6 +37,7 @@ import {EditorModule} from 'primeng/editor';
 import { TagModule } from 'primeng/tag';
 import {InputMaskModule} from 'primeng/inputmask';
 import {FieldsetModule} from 'primeng/fieldset';
+import { UsersModule } from '@elobong/users';
 
 const UX_MODULE = [
     CardModule, 
@@ -123,7 +124,8 @@ const routes: Routes = [
         HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
-        ...UX_MODULE
+        UsersModule,
+        ...UX_MODULE,
     ],
     providers: [
         CategoriesService, MessageService,
