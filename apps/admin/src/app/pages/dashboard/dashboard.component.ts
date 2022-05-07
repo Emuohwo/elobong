@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { OrdersService } from '@elobong/orders';
+import { ProductsService } from '@elobong/products';
 import { UsersService } from '@elobong/users';
+import { combineLatest } from 'rxjs';
 
 @Component({
   selector: 'admin-dashboard',
@@ -11,39 +13,53 @@ export class DashboardComponent implements OnInit {
   totalSales = 0;
   numOfOrders = 0;
 
+  statistics: number[] = [];
   constructor(
     private userService: UsersService,
-    private ordersService: OrdersService,
-  ) { }
+    private productService: ProductsService,
+    private ordersService: OrdersService
+  ) {}
+
 
   ngOnInit(): void {
-    this._getUsersStats();
-    this._getTotalSales();
-    this._getOrdersCount();
+    combineLatest([
+      this.ordersService.getOrdersCount(),
+      this.productService.getProductsCount(),
+      this.userService.getUsersCount(),
+      this.ordersService.getTotalSales()
+    ]).subscribe((values) => {
+      this.statistics = values;
+      console.log('values', values)
+    });
   }
+  // ngOnInit(): void {
+  //   this._getUsersStats();
+  //   this._getTotalSales();
+  //   this._getOrdersCount();
+  // }
 
-  private _getUsersStats(){
-    this.userService.getUserCount().subscribe(
-      (count)=> {
-        this.allUsers = count.userCount
-      }
-    )
-  }
+  // private _getUsersStats(){
+  //   this.userService.getUserCount().subscribe(
+  //     (count)=> {
+  //       this.allUsers = count.userCount
+  //     }
+  //   )
+  // }
 
-  private _getTotalSales(){
-    this.ordersService.getTotalSales().subscribe(
-      (count)=> {
-        this.totalSales = count.totalSales
-      }
-    )
-  }
+  // private _getTotalSales(){
+  //   this.ordersService.getTotalSales().subscribe(
+  //     (count)=> {
+  //       this.totalSales = count.totalSales
+  //     }
+  //   )
+  // }
   
-  private _getOrdersCount(){
-    this.ordersService.getOrdersCount().subscribe(
-      (count)=> {
-        this.numOfOrders = count.orderCount
-      }
-    )
-  }
+  // private _getOrdersCount(){
+  //   this.ordersService.getOrdersCount().subscribe(
+  //     (count)=> {
+  //       this.numOfOrders = count.orderCount
+  //     }
+  //   )
+  // }
 
 }
