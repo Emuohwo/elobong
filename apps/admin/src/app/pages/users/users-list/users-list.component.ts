@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User, UsersService } from '@elobong/users';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import * as countriesLib from 'i18n-iso-countries'
+import { Subject, takeUntil } from 'rxjs';
 
 declare const require:any;
 
@@ -12,9 +13,10 @@ declare const require:any;
   styles: [
   ]
 })
-export class UsersListComponent implements OnInit {
+export class UsersListComponent implements OnInit, OnDestroy {
 
   users: User[] = []
+  endsub$ : Subject<any> = new Subject();
 
   constructor(
     private usersService: UsersService,
@@ -25,6 +27,11 @@ export class UsersListComponent implements OnInit {
 
   ngOnInit(): void {
     this._getUsers();
+  }
+
+  ngOnDestroy(): void {
+    // this.endsub$.next();
+    this.endsub$.complete();
   }
 
   deleteUser(userId: string) {
@@ -56,7 +63,9 @@ export class UsersListComponent implements OnInit {
   }
 
   private _getUsers(){
-    this.usersService.getUsers().subscribe((_users) => {
+    this.usersService.getUsers()
+    .pipe(takeUntil(this.endsub$))
+    .subscribe((_users) => {
       this.users = _users;
     })
   }

@@ -1,10 +1,10 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { CategoriesService, Category, Product, ProductsService } from '@elobong/products';
 import { MessageService } from 'primeng/api';
-import { timer } from 'rxjs';
+import { Subject, takeUntil, timer } from 'rxjs';
 
 @Component({
   selector: 'admin-products-form',
@@ -12,14 +12,15 @@ import { timer } from 'rxjs';
   styles: [
   ]
 })
-export class ProductsFormComponent implements OnInit {
+export class ProductsFormComponent implements OnInit, OnDestroy {
 
   editMode = false;
   isSubmitted = false;
   form!: FormGroup
   categories: Category[] = [];
   imageDisplay?: string | ArrayBuffer | null;
-  currentProductID?: string
+  currentProductID?: string;
+  endsub$ : Subject<any> = new Subject();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -34,6 +35,11 @@ export class ProductsFormComponent implements OnInit {
     this._initForm()
     this._getCategories()
     this._checkEditMode()
+  }
+
+  ngOnDestroy(): void {
+    // this.endsub$.next();
+    this.endsub$.complete();
   }
 
   private _initForm(){
@@ -51,7 +57,9 @@ export class ProductsFormComponent implements OnInit {
   }
 
   private _getCategories() {
-    this.categoriesService.getCategories().subscribe((categories) => {
+    this.categoriesService.getCategories()
+    .pipe(takeUntil(this.endsub$))
+    .subscribe((categories) => {
       this.categories = categories
     })
   }

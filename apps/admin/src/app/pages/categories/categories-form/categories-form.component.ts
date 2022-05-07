@@ -1,10 +1,10 @@
 import { Location } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { CategoriesService, Category } from '@elobong/products';
 import { MessageService } from 'primeng/api';
-import { timer } from 'rxjs';
+import { Subject, takeUntil, timer } from 'rxjs';
 
 @Component({
   selector: 'admin-categories-form',
@@ -12,12 +12,13 @@ import { timer } from 'rxjs';
   styles: [
   ]
 })
-export class CategoriesFormComponent implements OnInit {
+export class CategoriesFormComponent implements OnInit, OnDestroy {
 
   form!: FormGroup;
   isSubmitted = false;
   editMode = false;
   currentCategoryID!: string;
+  endsub$ : Subject<any> = new Subject()
 
   constructor(
     private formBuilder: FormBuilder,
@@ -35,6 +36,10 @@ export class CategoriesFormComponent implements OnInit {
     });
 
     this._checkEditMode();
+  }
+  ngOnDestroy(): void {
+    // this.endsub$.next();
+    this.endsub$.complete();
   }
 
   cancel() {
@@ -64,7 +69,9 @@ export class CategoriesFormComponent implements OnInit {
       if (params['id']) {
         this.editMode = true;
         this.currentCategoryID = params['id']
-        this.categoriesService.getCategory(params['id']).subscribe(category => {
+        this.categoriesService.getCategory(params['id'])
+        .pipe(takeUntil(this.endsub$))
+        .subscribe(category => {
           this.categoryForm['name'].setValue(category.name);
           this.categoryForm['icon'].setValue(category.icon);
           this.categoryForm['color'].setValue(category.color);
