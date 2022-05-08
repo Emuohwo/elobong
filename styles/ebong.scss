@@ -1,4 +1,5 @@
 // Base
+@import '~normalize.css/normalize.css';
 @import './base/colors.scss';
 @import './base/fonts.scss';
 @import './base/mixins.scss';
@@ -13,11 +14,20 @@
 // Pages
 @import './apps/ebong/pages/home-page.scss';
 @import './apps/ebong/pages/product-list-page.scss';
+@import './libs/products/products.scss';
 
 
 // Shared
 @import './apps/ebong/shared/footer.scss';
 @import './apps/ebong/shared/header.scss';
+@import './apps/ebong/shared/nav.scss';
 
 // ui
-@import './libs/ui/ui.scss'
+@import './libs/ui/ui.scss';
+
+.container {
+    max-width: 1440px;
+    padding: 25px;
+    margin: 0 auto;
+    background: var(--surface-100);
+}
