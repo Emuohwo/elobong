@@ -20,4 +20,25 @@
             font-weight: 300;
         }
     }
+
+    &-image {
+        padding: 15px 0 0 0;
+        text-align: center;
+
+        img {
+            width: 300px;
+        }
+    }
+
+    &-button {
+        background-color: var(--surface-0);
+        color: $primary-color;
+        border: 0;
+
+        &:enabled:hover {
+            background-color: var(--surface-0);
+            color: $primary-color;
+            border: 0;
+        }
+    }
 }
