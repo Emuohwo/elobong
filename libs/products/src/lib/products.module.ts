@@ -4,6 +4,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { OrdersModule } from '@elobong/orders';
+import { UiModule } from '@elobong/ui';
 import { ProductsSearchComponent } from './components/products-search/products-search.component';
 import { CategoriesBannerComponent } from './components/categories-banner/categories-banner.component';
 import { RouterModule, Routes } from '@angular/router';
@@ -38,7 +39,7 @@ const routes:Routes = [
         RouterModule.forChild(routes), 
         ButtonModule, CheckboxModule,
         FormsModule, RatingModule,
-        InputNumberModule,
+        InputNumberModule, UiModule,
     ],
     exports: [ProductsSearchComponent, CategoriesBannerComponent, ProductItemComponent, FeaturedProductsComponent, ProductsListComponent],
     declarations: [ProductsSearchComponent, CategoriesBannerComponent, ProductItemComponent, FeaturedProductsComponent, ProductsListComponent, ProductDetailComponent],
