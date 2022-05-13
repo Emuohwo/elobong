@@ -10,9 +10,12 @@ import { RouterModule, Routes } from '@angular/router';
 import { ProductItemComponent } from './components/product-item/product-item.component';
 import { FeaturedProductsComponent } from './components/featured-products/featured-products.component';
 import { ButtonModule } from 'primeng/button';
+import { InputNumberModule } from 'primeng/inputnumber';
+import { RatingModule } from 'primeng/rating'
 import {CheckboxModule} from 'primeng/checkbox';
 import { ProductsListComponent } from './pages/products-list/products-list.component';
 import { FormsModule } from '@angular/forms';
+import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 
 const routes:Routes = [
     {
@@ -22,7 +25,11 @@ const routes:Routes = [
     {
         path: 'category/:categoryid',
         component: ProductsListComponent
-    }
+    },
+    {
+        path: 'products/:productid',
+        component: ProductDetailComponent
+    },
 ]
 
 @NgModule({
@@ -30,10 +37,11 @@ const routes:Routes = [
         CommonModule, OrdersModule, 
         RouterModule.forChild(routes), 
         ButtonModule, CheckboxModule,
-        FormsModule,
+        FormsModule, RatingModule,
+        InputNumberModule,
     ],
     exports: [ProductsSearchComponent, CategoriesBannerComponent, ProductItemComponent, FeaturedProductsComponent, ProductsListComponent],
-    declarations: [ProductsSearchComponent, CategoriesBannerComponent, ProductItemComponent, FeaturedProductsComponent, ProductsListComponent],
+    declarations: [ProductsSearchComponent, CategoriesBannerComponent, ProductItemComponent, FeaturedProductsComponent, ProductsListComponent, ProductDetailComponent],
     providers: [],
 })
 export class ProductsModule { }
