@@ -13,6 +13,7 @@ import {AccordionModule} from 'primeng/accordion';
 import { NavComponent } from './shared/nav/nav.component';
 import { ProductsModule } from '@elobong/products';
 import { HttpClientModule } from '@angular/common/http';
+import { OrdersModule } from '@elobong/orders';
 
 const routes: Routes = [
     { path: '', component: HomePageComponent },
@@ -23,7 +24,7 @@ const routes: Routes = [
     imports: [BrowserModule, BrowserAnimationsModule, 
         RouterModule.forRoot(routes), 
         AccordionModule, ProductsModule,
-        HttpClientModule, UiModule
+        HttpClientModule, UiModule, OrdersModule,
         
     ],
     providers: [],

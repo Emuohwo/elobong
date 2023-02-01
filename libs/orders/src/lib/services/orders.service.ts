@@ -1,41 +1,39 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
-import { map, Observable } from 'rxjs';
-
-import { environment } from '@env/environment'
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Order } from '../models/order';
+import { environment } from '@env/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrdersService {
-  apiURLOrders = environment.apiURL + 'orders'
+  apiURLOrders = environment.apiURL + 'orders';
+  apiURLProducts = environment.apiURL + 'products';
 
-  constructor( private http: HttpClient) { }
+  constructor(private http: HttpClient) {} 
 
   getOrders(): Observable<Order[]> {
-    return this.http.get<Order[]>(this.apiURLOrders)
+    return this.http.get<Order[]>(this.apiURLOrders);
   }
 
   getOrder(orderId: string): Observable<Order> {
-    return this.http.get<Order>(`${this.apiURLOrders}/${orderId}`)
+    return this.http.get<Order>(`${this.apiURLOrders}/${orderId}`);
   }
 
-  createOrder(category: Order): Observable<Order> {
-    return this.http.post<Order>(
-      this.apiURLOrders,
-      category
-    )
+  createOrder(order: Order): Observable<Order> {
+    return this.http.post<Order>(this.apiURLOrders, order);
   }
-  
-  // getTotalSales() : Observable<any> {
-  //   return this.http.get<any>(`${this.apiURLOrders}/get/totalSales`)
-  // }
-  
-  // getOrdersCount() : Observable<any> {
-  //   return this.http.get<any>(`${this.apiURLOrders}/get/count`)
-  // }
-    
+
+  updateOrder(orderStaus: { status: string }, orderId: string): Observable<Order> {
+    return this.http.put<Order>(`${this.apiURLOrders}/${orderId}`, orderStaus);
+  }
+
+  deleteOrder(orderId: string): Observable<any> {
+    return this.http.delete<any>(`${this.apiURLOrders}/${orderId}`);
+  }
+
   getOrdersCount(): Observable<number> {
     return this.http
       .get<number>(`${this.apiURLOrders}/get/count`)
@@ -44,19 +42,11 @@ export class OrdersService {
 
   getTotalSales(): Observable<number> {
     return this.http
-      .get<number>(`${this.apiURLOrders}/get/totalSales`)
-      .pipe(map((objectValue: any) => objectValue.totalSales));
+      .get<number>(`${this.apiURLOrders}/get/totalsales`)
+      .pipe(map((objectValue: any) => objectValue.totalsales));
   }
 
-  updateOrder(orderStatus: { status: string }, orderId: string): Observable<Order> {
-    return this.http.put<Order>(
-      `${this.apiURLOrders}/${orderId}`, 
-      orderStatus
-    )
+  getProduct(productId: string): Observable<any> {
+    return this.http.get<any>(`${this.apiURLProducts}/${productId}`);
   }
-
-  deleteOrder(orderId: string): Observable<any> {
-    return this.http.delete<any>(`${this.apiURLOrders}/${orderId}`)
-  }
-
 }

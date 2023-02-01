@@ -1,4 +1,4 @@
 export class OrderItem {
-    product?: any;
-    quantity?: number;
+  product?: string;
+  quantity?: number;
 }

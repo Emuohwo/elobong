@@ -1,17 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'ebong-nav',
-  templateUrl: './nav.component.html',
+  selector: 'orders-thank-you-page',
+  templateUrl: './thank-you.component.html',
   styles: [
   ]
 })
-export class NavComponent implements OnInit {
+export class ThankYouComponent implements OnInit {
 
   constructor() { }
 
   ngOnInit(): void {
-    console.log()
   }
 
 }
